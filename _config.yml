@@ -19,13 +19,13 @@ locale                   : "ko-KR"
 title                    : "Unani의 테크 블로그"
 title_separator          : "-"
 subtitle                 : 장고, 자바스크립트, 알고리즘 TIL 블로그입니다.
-name                     : Yoonhwan Jung
+name                     : "Yoonhwan Jung"
 description              : "장고, 자바스크립트, 알고리즘 TIL 블로그입니다."
 url                      : "https://unani92.github.io"
 baseurl                  : ""
 repository               : "unani92/unani92.github.io"
-teaser                   : "/assets/images/500x300.png"
-logo                     : "/assets/images/88x88.png"
+teaser                   : "/assets/images/background.jpeg"
+logo                     : "/assets/images/teaser.jpeg"
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
 breadcrumbs              : true
 words_per_minute         : 200
@@ -93,18 +93,18 @@ analytics:
 
 # Site Author
 author:
-  name             : "Your Name"
+  name             : "Yoonhwan Jung"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "I am an **amazing** person."
-  location         : "Somewhere"
-  email            :
+  bio              : "SSAFY #3"
+  location         : "Seoul / Korea"
+  email            : "unani9292@gmail.com"
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
       # url: "mailto:your.name@email.com"
-    - label: "Website"
-      icon: "fas fa-fw fa-link"
-      # url: "https://your-website.com"
+    # - label: "Website"
+    #   icon: "fas fa-fw fa-link"
+    #   # url: "https://your-website.com"
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
       # url: "https://twitter.com/"
@@ -113,7 +113,7 @@ author:
       # url: "https://facebook.com/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      # url: "https://github.com/"
+      url: "https://github.com/unani92"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       # url: "https://instagram.com/"
