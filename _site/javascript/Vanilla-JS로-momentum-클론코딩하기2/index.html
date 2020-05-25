@@ -1,0 +1,744 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Vanilla JS로 momentum 클론코딩하기 2 - Unani의 테크 블로그</title>
+<meta name="description" content="Javascript ">
+
+
+  <meta name="author" content="Yoonhwan Jung">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Unani의 테크 블로그">
+<meta property="og:title" content="Vanilla JS로 momentum 클론코딩하기 2">
+<meta property="og:url" content="http://localhost:4000/javascript/Vanilla-JS%EB%A1%9C-momentum-%ED%81%B4%EB%A1%A0%EC%BD%94%EB%94%A9%ED%95%98%EA%B8%B02/">
+
+
+  <meta property="og:description" content="Javascript ">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/background.jpeg">
+
+
+
+
+
+  <meta property="article:published_time" content="2020-05-25T00:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/javascript/Vanilla-JS%EB%A1%9C-momentum-%ED%81%B4%EB%A1%A0%EC%BD%94%EB%94%A9%ED%95%98%EA%B8%B02/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Yoonhwan Jung",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Unani의 테크 블로그 Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Unani의 테크 블로그
+          <span class="site-subtitle">장고, 자바스크립트, 알고리즘 TIL 블로그입니다.</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/">Category</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/javascript">Javascript</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="http://localhost:4000/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#javascript" itemprop="item"><span itemprop="name">Javascript</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">Vanilla JS로 momentum 클론코딩하기 2</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/background.jpeg" alt="Yoonhwan Jung" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Yoonhwan Jung</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>SSAFY #3, Be programmer, Ultras</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Seoul / Korea</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/unani92" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:unani9292@gmail.com">
+            <meta itemprop="email" content="unani9292@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">이메일</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Vanilla JS로 momentum 클론코딩하기 2">
+    <meta itemprop="description" content="Javascript">
+    <meta itemprop="datePublished" content="2020-05-25T00:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Vanilla JS로 momentum 클론코딩하기 2
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 분 소요
+
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p><img src="https://user-images.githubusercontent.com/53211781/82825194-c2bbac00-9ee5-11ea-95e7-aaa95fb7e5ec.png" alt="image-20200520001229052" /></p>
+
+<h2 id="기본-컨셉">기본 컨셉</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. 할 일을 입력 후 enter를 친다. 
+2. toDo List에 업데이트된다. 
+3. 할일 마감 후 toDo의 글자부분을 클릭하면 Complete로 이동한다. 
+4. 이동된 toDo는 취소선이 그어지며, 클릭 시 다시 toDo List로 이동한다. 
+5. 수정 및 삭제는 ToDo List, Completed 어디에서도 가능하다. 
+</code></pre></div></div>
+
+<h3 id="초기-변수-선언-및-할당">초기 변수 선언 및 할당</h3>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">form</span>  <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">form</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">input</span> <span class="o">=</span> <span class="nx">form</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">input</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">toDoList</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">#toDoList</span><span class="dl">"</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">completeList</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">#completeList</span><span class="dl">"</span><span class="p">)</span>
+</code></pre></div></div>
+<blockquote>
+  <p>할 일을 입력받기 위한 form, input을 변수에 담아주고 toDo가 실제로 보여질 ul태그 2개도 각각 id를 부여해 변수에 담아준다.</p>
+</blockquote>
+
+<h3 id="todo-입력-받기">toDo 입력 받기</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">script</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+    <span class="kd">const</span> <span class="nx">currentValue</span> <span class="o">=</span> <span class="nx">input</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">currentValue</span> <span class="o">!==</span> <span class="dl">""</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// append new toDo at toDoList</span>
+        <span class="nx">paintTodo</span><span class="p">(</span><span class="nx">currentValue</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">input</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="kc">null</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">init</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// create new toDo</span>
+    <span class="nx">form</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">submit</span><span class="dl">'</span><span class="p">,</span><span class="nx">script</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">init</span><span class="p">();</span>
+</code></pre></div></div>
+<p>form에서 <strong>사용자의 input이 입력받아지는 순간</strong> 모든 일이 시작된다. 무슨 일들이 벌어지는지 살펴보자</p>
+
+<p>우선 form 태그는 <code class="highlighter-rouge">enter</code> 키가 눌려지면 디폴트로 새로고침이 발생한다. 이를 방지하기 위해 우선 form에서 발생한 submit 이벤트의 디폴트 행동을 막아줄 필요가 있다. 이를 위해 <code class="highlighter-rouge">event.preventDefault()</code>를 사용해 <code class="highlighter-rouge">enter</code> 를 눌러도 새로고침이 발생하지 않게 막아준다.</p>
+
+<p>또한 아무 것도 입력하지 않았는데 <code class="highlighter-rouge">enter</code>를 눌렀다고 이벤트가 발생하는 일도 막아야 한다. 이는 사용자가 input 태그에 실제 입력한 값인 <code class="highlighter-rouge">input.value</code>가 null인지 아닌지를 통해 판별할 수 있다.</p>
+
+<p>모든 조건이 만족하면 ul 태그에 li로서 반영하는 일을 할 수 있다.</p>
+
+<h3 id="사용자-입력값-ul-태그-아래-li에-반영하기">사용자 입력값 ul 태그 아래 li에 반영하기</h3>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">paintTodo</span><span class="p">(</span><span class="nx">text</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// append new toDo at toDoList</span>
+    <span class="kd">const</span> <span class="nx">li</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">li</span><span class="dl">"</span><span class="p">)</span>
+    <span class="nx">li</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">d-flex justify-content-center</span><span class="dl">"</span>
+    <span class="kd">const</span> <span class="nx">delBtn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">button</span><span class="dl">"</span><span class="p">)</span>
+    <span class="nx">delBtn</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="dl">"</span><span class="se">\</span><span class="s2">u{274C}</span><span class="dl">"</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">span</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">span</span><span class="dl">"</span><span class="p">)</span>
+    <span class="nx">span</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">=</span> <span class="nx">text</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">editForm</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">form</span><span class="dl">"</span><span class="p">)</span>
+    <span class="kd">const</span> <span class="nx">editInput</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">input</span><span class="dl">"</span><span class="p">)</span>
+    <span class="nx">editInput</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">ml-3 edit</span><span class="dl">"</span>
+    <span class="nx">editForm</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">editInput</span><span class="p">)</span>
+    <span class="nx">editForm</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">submit</span><span class="dl">"</span><span class="p">,</span><span class="nx">editTodos</span><span class="p">)</span>
+    <span class="kd">const</span> <span class="nx">editBtn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">span</span><span class="dl">"</span><span class="p">)</span>
+    <span class="nx">editBtn</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">badge badge-light edit-btn</span><span class="dl">"</span>
+    <span class="nx">editBtn</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">edit</span><span class="dl">"</span>
+    <span class="nx">li</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">span</span><span class="p">,</span><span class="nx">editForm</span><span class="p">,</span><span class="nx">editBtn</span><span class="p">,</span><span class="nx">delBtn</span><span class="p">);</span>
+    <span class="nx">toDoList</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">li</span><span class="p">);</span>
+    <span class="c1">// edit toDo 이벤트 추가</span>
+    <span class="c1">// cancelLine 이벤트 추가</span>
+    <span class="c1">// delete toDo 이벤트 추가</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<ol>
+  <li><code class="highlighter-rouge">document.createElement()</code>를 통해 li태그, span태그 수정을 위한 form, 삭제버튼을 만들어준다.</li>
+  <li>만들고 나서 클래스명, 내부 텍스트는 생성된 객체의 매서드(<code class="highlighter-rouge">innerText</code>, <code class="highlighter-rouge">innerHTML</code>, <code class="highlighter-rouge">className</code>)를 활용해 만들어줄 수 있다.</li>
+  <li>이후 <code class="highlighter-rouge">li.append(span,editForm,editBtn,delBtn)</code>를 통해 span, form, button 모두를 li태그의 자식 노드로 합쳐준다.</li>
+  <li>합친 li태그는 toDoList ul 태그의 자식으로 합쳐준다.</li>
+</ol>
+
+<h3 id="todo-수정-및-삭제하기">toDo 수정 및 삭제하기</h3>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">paintTodo</span><span class="p">(</span><span class="nx">text</span><span class="p">)</span> <span class="p">{</span>
+        <span class="p">...</span>
+        <span class="p">...</span>
+    <span class="c1">// edit toDo</span>
+    <span class="nx">editBtn</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="nx">editTodos</span><span class="p">)</span>
+    <span class="nx">editBtn</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">submit</span><span class="dl">"</span><span class="p">,</span> <span class="nx">editTodos</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>수정 폼에 수정하려고 하는 내용을 입력하고 버튼 클릭 혹은 enter키를 눌렀을 때 수정 내용이 반영되게 하는 이벤트를 추가해주려고 한다.</p>
+
+<h4 id="edittodos">editTodos</h4>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">editTodos</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">type</span><span class="o">===</span><span class="dl">"</span><span class="s2">submit</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="kd">const</span> <span class="nx">edit</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">li</span> <span class="o">=</span> <span class="nx">edit</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">preValue</span> <span class="o">=</span> <span class="nx">li</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">span</span><span class="dl">"</span><span class="p">)</span>
+    <span class="kd">const</span> <span class="nx">editInput</span> <span class="o">=</span> <span class="nx">li</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">input</span><span class="dl">"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">editInput</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">preValue</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">=</span> <span class="nx">editInput</span><span class="p">.</span><span class="nx">value</span>
+        <span class="nx">editInput</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="kc">null</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<ol>
+  <li>수정 폼의 내용이 제대로 반영되기 위해서는 다음 조건을 충족해야 한다.
+    <blockquote>
+      <p>엔터키를 눌렀을때 새로고침이 발생하지 않아야 한다.</p>
+    </blockquote>
+
+    <ul>
+      <li>이를 위해 submit 타입(엔터키 클릭)으로 이벤트가 발생했을 경우 디폴트 이벤트를 막아주어야 한다.</li>
+    </ul>
+  </li>
+  <li>‘click’ / ‘submit’ 이벤트가 발생한 원점 <code class="highlighter-rouge">event.target</code>을 바탕으로 <strong>부모 노드를 찾아내고(<code class="highlighter-rouge">parentNode</code>) 자식 노드의 <code class="highlighter-rouge">querySelect()</code>를 추출</strong>한다.</li>
+  <li>빈 input을 반영하는 일을 막기 위해 <code class="highlighter-rouge">editInput.value</code>를 확인한다.
+    <ul>
+      <li>내용이 있으면 앞에서 뽑아낸 수정 전의 <code class="highlighter-rouge">preValue</code>의 실제 텍스트를 <code class="highlighter-rouge">editInput.value</code>로 바꿔준다.</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="cancelline">cancelLine</h3>
+<p>완료한 toDo는 toDo의 span부분 클릭 시 Completed ul로 이동하고 취소선이 그어지는 ui를 구현하려 한다.</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">paintTodo</span><span class="p">(</span><span class="nx">text</span><span class="p">)</span> <span class="p">{</span>
+        <span class="p">...</span>
+        <span class="p">...</span>
+    <span class="c1">// make cancelLine at toDo span</span>
+    <span class="nx">span</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="nx">cancelLine</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">cancelLine</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">cancel</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">li</span> <span class="o">=</span> <span class="nx">cancel</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">cancel</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="dl">"</span><span class="s2">cancel</span><span class="dl">"</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nx">toDoList</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">li</span><span class="p">)</span>
+        <span class="nx">cancel</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="dl">"</span><span class="s2">cancel</span><span class="dl">"</span><span class="p">)</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">completeList</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">li</span><span class="p">)</span>
+        <span class="nx">cancel</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="dl">"</span><span class="s2">cancel</span><span class="dl">"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<ol>
+  <li>수정 로직과 마찬가지로 <strong>이벤트가 발생하는 원점을 찾고 이를 바탕으로 부모노드를 찾아</strong> 변수에 할당한다.</li>
+  <li>이벤트 원점에 해당하는 span태그의 클래스가 <code class="highlighter-rouge">cancel</code>이면(Completed ul의 자식이라면) <code class="highlighter-rouge">cancel</code>클래스를 삭제하고 toDoList의 자식으로 합쳐준다. 반대의 경우는 반대로 적용한다.
+    <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.cancel</span> <span class="p">{</span>
+  <span class="nl">text-decoration</span><span class="p">:</span> <span class="nb">line-through</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="deletetodo">deleteTodo</h3>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">paintTodo</span><span class="p">(</span><span class="nx">text</span><span class="p">)</span> <span class="p">{</span>
+        <span class="p">...</span>
+        <span class="p">...</span>
+    <span class="c1">// delete toDo 이벤트 추가</span>
+    <span class="nx">delBtn</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="nx">deleteTodos</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">deleteTodos</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">btn</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">li</span> <span class="o">=</span> <span class="nx">btn</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">span</span> <span class="o">=</span> <span class="nx">li</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">span</span><span class="dl">"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">span</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="dl">"</span><span class="s2">cancel</span><span class="dl">"</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nx">completeList</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">li</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">toDoList</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">li</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>삭제는 삭제버튼을 클릭 시에 작동하는 이벤트이다. 따라서 마찬가지로 <strong>이벤트 원점과 부모노드</strong>를 찾아준다. 삭제는 toDo에 있건 Completed에 있건 상관없이 이뤄저야 하기 때문에 다음과 같이 조건을 분기한다.</p>
+<ol>
+  <li>span이 cancel 클래스를 가진 경우(completeList의 자식인 경우)
+    <ul>
+      <li>completeList에 있는 li 자식노드를 전부 삭제</li>
+    </ul>
+  </li>
+  <li>반대의 경우는 반대로 적용한다.</li>
+</ol>
+
+<p>사실 localstorage 안에 toDo를 저장하면 새로고침을 하더라도 사용자가 직접 삭제하기 전까지는 계속해서 뷰에 남아있는데 거기까지 구현은 못했다. 이는 향후 구현하기로 한다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#javascript" class="page__taxonomy-item" rel="tag">Javascript</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-05-25T00:00:00+09:00">May 25, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Vanilla+JS%EB%A1%9C+momentum+%ED%81%B4%EB%A1%A0%EC%BD%94%EB%94%A9%ED%95%98%EA%B8%B0+2%20http%3A%2F%2Flocalhost%3A4000%2Fjavascript%2FVanilla-JS%25EB%25A1%259C-momentum-%25ED%2581%25B4%25EB%25A1%25A0%25EC%25BD%2594%25EB%2594%25A9%25ED%2595%2598%25EA%25B8%25B02%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fjavascript%2FVanilla-JS%25EB%25A1%259C-momentum-%25ED%2581%25B4%25EB%25A1%25A0%25EC%25BD%2594%25EB%2594%25A9%25ED%2595%2598%25EA%25B8%25B02%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fjavascript%2FVanilla-JS%25EB%25A1%259C-momentum-%25ED%2581%25B4%25EB%25A1%25A0%25EC%25BD%2594%25EB%2594%25A9%25ED%2595%2598%25EA%25B8%25B02%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/javascript/Vanilla-JS%EB%A1%9C-momentum-%ED%81%B4%EB%A1%A0%EC%BD%94%EB%94%A9%ED%95%98%EA%B8%B0-1/" class="pagination--pager" title="Vanilla JS로 momentum 클론코딩하기 1
+">이전</a>
+    
+    
+      <a href="/javascript/axios-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC%EB%A5%BC-%ED%86%B5%ED%95%9C-%EB%B9%84%EB%8F%99%EA%B8%B0%EC%B2%98%EB%A6%AC-%EB%B0%A9%EC%8B%9D/" class="pagination--pager" title="Axios 라이브러리를 통한 비동기처리 방식
+">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/background.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/javascript/axios-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC%EB%A5%BC-%ED%86%B5%ED%95%9C-%EB%B9%84%EB%8F%99%EA%B8%B0%EC%B2%98%EB%A6%AC-%EB%B0%A9%EC%8B%9D/" rel="permalink">Axios 라이브러리를 통한 비동기처리 방식
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 분 소요
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Javascript
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/background.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/javascript/Vanilla-JS%EB%A1%9C-momentum-%ED%81%B4%EB%A1%A0%EC%BD%94%EB%94%A9%ED%95%98%EA%B8%B0-1/" rel="permalink">Vanilla JS로 momentum 클론코딩하기 1
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  1 분 소요
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Javascript
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/unani92" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://instagram.com/marine_kyunhwan_tnts" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 Yoonhwan Jung. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://localhost:4000/javascript/Vanilla-JS%EB%A1%9C-momentum-%ED%81%B4%EB%A1%A0%EC%BD%94%EB%94%A9%ED%95%98%EA%B8%B02/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/javascript/Vanilla JS로 momentum 클론코딩하기2"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://unani92-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>
