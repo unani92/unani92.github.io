@@ -3,10 +3,10 @@ main:
   - title: "About"
     url: /about/
   - title: "Category"
-    url: /category/
+    url: /categories/
   # - title: "Sample Collections"
   #   url: /collection-archive/
   # - title: "Sitemap"
   #   url: /sitemap/
   - title: "Javascript"
-    url: "/category/javascript"
+    url: "/categories/javascript"
