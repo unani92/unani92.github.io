@@ -1,4 +1,375 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-05-26T00:21:32+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Unani의 테크 블로그</title><subtitle>장고, 자바스크립트, 알고리즘 TIL 블로그입니다.</subtitle><author><name>Yoonhwan Jung</name><email>unani9292@gmail.com</email></author><entry><title type="html">Vanilla JS로 momentum 클론코딩하기 1</title><link href="http://localhost:4000/javascript/Vanilla-JS%EB%A1%9C-momentum-%ED%81%B4%EB%A1%A0%EC%BD%94%EB%94%A9%ED%95%98%EA%B8%B0-1/" rel="alternate" type="text/html" title="Vanilla JS로 momentum 클론코딩하기 1" /><published>2020-05-25T00:00:00+09:00</published><updated>2020-05-25T00:00:00+09:00</updated><id>http://localhost:4000/javascript/Vanilla%20JS%EB%A1%9C%20momentum%20%ED%81%B4%EB%A1%A0%EC%BD%94%EB%94%A9%ED%95%98%EA%B8%B0%201</id><content type="html" xml:base="http://localhost:4000/javascript/Vanilla-JS%EB%A1%9C-momentum-%ED%81%B4%EB%A1%A0%EC%BD%94%EB%94%A9%ED%95%98%EA%B8%B0-1/">&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/53211781/82825194-c2bbac00-9ee5-11ea-95e7-aaa95fb7e5ec.png&quot; alt=&quot;image-20200520001229052&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-05-28T02:48:37+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Unani의 테크 블로그</title><subtitle>장고, 자바스크립트, 알고리즘 TIL 블로그입니다.</subtitle><author><name>Yoonhwan Jung</name><email>unani9292@gmail.com</email></author><entry><title type="html">[Vue JS] Routing 연습하기(with lodash)</title><link href="http://localhost:4000/javascript/vue_cli_route/" rel="alternate" type="text/html" title="[Vue JS] Routing 연습하기(with lodash)" /><published>2020-05-27T00:00:00+09:00</published><updated>2020-05-27T00:00:00+09:00</updated><id>http://localhost:4000/javascript/vue_cli_route</id><content type="html" xml:base="http://localhost:4000/javascript/vue_cli_route/">&lt;h2 id=&quot;intro--vue에서의-routing이란&quot;&gt;intro : vue에서의 routing이란&lt;/h2&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;서버 사이드에서 라우팅은 URI에 해당하는 html을 렌더링하는 것이다. 
+하지만 SPA 방식의 앱에서 라우팅은 DOM 조작을 통해 해당하는 뷰를 구현할 수 있다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;이러한 차이를 단적으로 설명하자면 &lt;strong&gt;새로고침&lt;/strong&gt; 을 통해 말할 수 있다. 
+서버사이드의 라우팅은 새로운 &lt;code class=&quot;highlighter-rouge&quot;&gt;html페이지를 렌더링&lt;/code&gt;해서 사용자에게 보여주기 때문에 &lt;strong&gt;새로고침&lt;/strong&gt; 과정이 필연적이다. 
+하지만 SPA 방식의 라우팅은 서버와의 통신이 일어나지 않고 &lt;code class=&quot;highlighter-rouge&quot;&gt;브라우저의 JS&lt;/code&gt;를 통해 단일 페이지에서 수정되는 부분만 바뀌기 때문에 &lt;strong&gt;새로고침이 일어나지 않는다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;routing-구현하기&quot;&gt;Routing 구현하기&lt;/h2&gt;
+&lt;p&gt;&lt;img width=&quot;823&quot; alt=&quot;스크린샷 2020-05-28 오전 12 48 59&quot; src=&quot;https://user-images.githubusercontent.com/53211781/83042870-1a405000-a07d-11ea-9127-3097c167c04b.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이미지와 같이 vue cli에서 제공하는 기능을 활용해 네비게이션바가 있는 vue app을 만들어보자&lt;/p&gt;
+
+&lt;h3 id=&quot;1-route-기능-붙이기&quot;&gt;1. route 기능 붙이기&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;vue add route
+
+? What &lt;span class=&quot;k&quot;&gt;do &lt;/span&gt;you want to generate? Initial framework
+? Use &lt;span class=&quot;nb&quot;&gt;history &lt;/span&gt;mode &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;router? Yes
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;여기서 &lt;code class=&quot;highlighter-rouge&quot;&gt;history mode&lt;/code&gt;는 yes로 설정해주자. No라고 한다면 &lt;code class=&quot;highlighter-rouge&quot;&gt;hash mode&lt;/code&gt;가 설정된다.
+이는 url에 hash(#)을 사용해 url을 불러온다. &lt;code class=&quot;highlighter-rouge&quot;&gt;history mode&lt;/code&gt;는 &lt;strong&gt;hash(#)을 제거한 url&lt;/strong&gt;을 사용한다.&lt;/p&gt;
+
+&lt;p&gt;설치가 완료되면 &lt;code class=&quot;highlighter-rouge&quot;&gt;../src/router&lt;/code&gt; 디렉터리가 생성된다. router 폴더 안에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;index.js&lt;/code&gt; 파일이 자동으로 생성된다.&lt;/p&gt;
+
+&lt;h3 id=&quot;2-indexjs-파헤치기&quot;&gt;2. index.js 파헤치기&lt;/h3&gt;
+
+&lt;h4 id=&quot;indexjs&quot;&gt;index.js&lt;/h4&gt;
+&lt;div class=&quot;language-vuejs highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Index from &quot;@/views/Index&quot;;
+Vue.use(VueRouter)
+
+const routes = [
+{ path: '/', name: 'Index', component: Index, },
+]
+
+// eslint-disable-next-line no-new
+const router = new VueRouter({
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes
+})
+
+export default router
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;서버사이드 렌더링의 예시인 Django로 따지면 &lt;code class=&quot;highlighter-rouge&quot;&gt;urls.py&lt;/code&gt; 패턴과 유사한 로직이다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;django.urls&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;views&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;app_name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'app_name'&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;urlpatterns&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'app/route'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;views&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;장고의 function에 해당하는 (1)&lt;code class=&quot;highlighter-rouge&quot;&gt;component를 import&lt;/code&gt;하고 (2)&lt;code class=&quot;highlighter-rouge&quot;&gt;url 패턴을 지정&lt;/code&gt;해주고
+(3)&lt;code class=&quot;highlighter-rouge&quot;&gt;component를 명시&lt;/code&gt;함으로써 라우팅 기능을 구현할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;그렇다면 component는 어디에 어떻게 작성할 수 있는가?&lt;/p&gt;
+
+&lt;h3 id=&quot;3-component-구성하기&quot;&gt;3. Component 구성하기&lt;/h3&gt;
+
+&lt;p&gt;component는 &lt;code class=&quot;highlighter-rouge&quot;&gt;app.vue&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;router&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;components&lt;/code&gt; 등과 같은 곳에 있는
+&lt;code class=&quot;highlighter-rouge&quot;&gt;src&lt;/code&gt; 폴더 하위에 views 디렉터리에 위치시킨다. &lt;code class=&quot;highlighter-rouge&quot;&gt;BASE_DIR/src/views/views&lt;/code&gt; 
+views 디렉터리가 없으면 폴더를 생성한다.&lt;/p&gt;
+
+&lt;h4 id=&quot;indexvue&quot;&gt;index.vue&lt;/h4&gt;
+
+&lt;p&gt;vue 파일의 구성은 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;template&amp;gt;&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;script&amp;gt;&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;style scoped&amp;gt;&lt;/code&gt; 로 이루어진다. 
+&lt;strong&gt;vue 파일 각각은 SPA의 기능 하나 하나를 의미&lt;/strong&gt;한다. 이러한 파일(개별 기능)들이 모여 &lt;code class=&quot;highlighter-rouge&quot;&gt;APP.vue&lt;/code&gt; 에서 취합함으로써
+싱글 페이지 어플리케이션 하나가 완성이 된다.&lt;/p&gt;
+&lt;div class=&quot;language-vue highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;Index&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;제공하는 기능&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;로또 번호 추첨 | 점심메뉴 추천&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Index&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;번외--lodash-라이브러리-사용하기&quot;&gt;번외 : lodash 라이브러리 사용하기&lt;/h4&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;종종 랜덤 샘플링, 수학적 기능을 자바스크립트를 통해 사용하고자 할 일이 있다.
+하지만 자바스크립트는 이러한 기능을 구현하기 어렵다.(물론 가능은 하지만….)
+따라서 이러한 활동을 쉽게 할 수 있는 라이브러리를 활용하고자 한다. 
+https://www.npmjs.com/package/lodash&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h5 id=&quot;install&quot;&gt;install&lt;/h5&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;npm i lodash
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h5 id=&quot;import&quot;&gt;import&lt;/h5&gt;
+&lt;div class=&quot;language-vue highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;script&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;lodash&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;lottovue&quot;&gt;Lotto.vue&lt;/h4&gt;
+
+&lt;h5 id=&quot;script-getlottonumber&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;script&amp;gt;&lt;/code&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;getLottoNumber()&lt;/code&gt;&lt;/h5&gt;
+&lt;p&gt;빈 number 값을 설정한 뒤 버튼을 클릭하면 작동하게 될 &lt;code class=&quot;highlighter-rouge&quot;&gt;getLottoNumber&lt;/code&gt;를 만들어준다. 
+숫자 6개를 샘플링하면 [] 안에 담겨저 나오고 대괄호까지 출력되기 때문에 약간의 조치를 취했다. 
+1에서 46의 범위 안에서 랜덤 숫자를 하나 출력하는데 이것을 6번 진행하면 임의의 로또번호 6개를 뽑을 수 있다.&lt;/p&gt;
+
+&lt;h5 id=&quot;template&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;template&amp;gt;&lt;/code&gt;&lt;/h5&gt;
+&lt;ul&gt;
+  &lt;li&gt;사용자가 제출할 수 없는 input 태그를 만들고 그곳에 number를 바인딩한다.&lt;/li&gt;
+  &lt;li&gt;버튼 클릭 시 함수가 동작하도록 이벤트를 걸어준다. &lt;code class=&quot;highlighter-rouge&quot;&gt;v-on:click === @click&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-vue highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;my-3&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Lotto&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-bind:value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;number&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Input&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;disabled&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;button&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;click=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;getLottoNumber&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;btn btn-success&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;번호 추천&lt;span class=&quot;nt&quot;&gt;&amp;lt;/button&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;lodash&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Lotto&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;na&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&quot;&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;methods&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;getLottoNumber&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+              &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&quot;&lt;/span&gt;
+              &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                  &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sample&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;46&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;style&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;scoped&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nc&quot;&gt;.Input&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;250px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;text-align&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;center&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1rem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;border&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;outline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;transparent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;border-bottom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3px&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;solid&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;black&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;appvue-에-컴포넌트-연결하기&quot;&gt;App.vue 에 컴포넌트 연결하기&lt;/h3&gt;
+
+&lt;p&gt;라우터는 &lt;strong&gt;네비게이션 바&lt;/strong&gt;와 개별 컴포넌트들의 &lt;strong&gt;내용&lt;/strong&gt; 두개로 구성된다.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;router-link to=&quot;url&quot;&amp;gt;&lt;/code&gt; : &lt;code class=&quot;highlighter-rouge&quot;&gt;../src/router/index.js&lt;/code&gt; 에서 정의한 url 패턴에 맞게 네비게이션바를 만든다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;router-view/&amp;gt;&lt;/code&gt; : 라우터 링크에 해당하는 부분만을 바꿔 컴포넌트 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;template&amp;gt;&lt;/code&gt;에서 정의한 내용을 보여준다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-vue highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;app&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;nav&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;router-link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;to=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Index&lt;span class=&quot;nt&quot;&gt;&amp;lt;/router-link&amp;gt;&lt;/span&gt; |
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;router-link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;to=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/lotto&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Lotto&lt;span class=&quot;nt&quot;&gt;&amp;lt;/router-link&amp;gt;&lt;/span&gt; |
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;router-link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;to=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/lunch&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Lunch&lt;span class=&quot;nt&quot;&gt;&amp;lt;/router-link&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;router-view/&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img width=&quot;551&quot; alt=&quot;스크린샷 2020-05-28 오전 2 13 06&quot; src=&quot;https://user-images.githubusercontent.com/53211781/83051332-dbb09280-a088-11ea-87d1-440204565027.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;url은 바뀌었지만 새로고침 렌더링이 발생하지 않는다. 즉 &lt;strong&gt;서버로 요청을 보내는 것이 아니라는 의미&lt;/strong&gt;이다. 
+다만 라우팅이 이루어지면 브라우저의 JS가 &lt;strong&gt;DOM 조작을 통해 해당하는 부분만을 바꿔 렌더링&lt;/strong&gt;하는 것이 SPA의 라우팅이라고 할 수 있다.&lt;/p&gt;</content><author><name>Yoonhwan Jung</name><email>unani9292@gmail.com</email></author><summary type="html">Javascript</summary></entry><entry><title type="html">[Vue JS] 무한스크롤과 라이프사이클 Hook</title><link href="http://localhost:4000/javascript/lifecyclehooks/" rel="alternate" type="text/html" title="[Vue JS] 무한스크롤과 라이프사이클 Hook" /><published>2020-05-26T00:00:00+09:00</published><updated>2020-05-26T00:00:00+09:00</updated><id>http://localhost:4000/javascript/lifecyclehooks</id><content type="html" xml:base="http://localhost:4000/javascript/lifecyclehooks/">&lt;h2 id=&quot;intro&quot;&gt;intro&lt;/h2&gt;
+
+&lt;h3 id=&quot;life-cycle-hook-in-vue&quot;&gt;Life Cycle Hook in Vue&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/53211781/82904340-4a182680-9f9d-11ea-8b91-22043d0bd02e.png&quot; alt=&quot;image&quot; /&gt;
+&amp;lt;이미지 출처 : https://codingexplained.com/coding/front-end/vue-js/vue-instance-lifecycle-hooks&amp;gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Vue 인스턴스가 생성되고 소멸되기까지의 과정 속에서 콜백 함수를 걸어줌으로써 DOM 조작을 할 수 있다.
+다시말해 인스턴스가 생성(Create), HTML 노드와 연결되고(Mount) 변화되는(Update) 되는 순간을 JS로 탐지하고(Hook)
+적절한 function을 통해 조작할 수 있다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Vue의 라이프사이클 Hook을 이해하고 적절한 타이밍에 DOM 조작을 함으로써 무한스크롤이 구현된 간단한 APP을 만들어 보았다.&lt;/p&gt;
+
+&lt;h3 id=&quot;vue-인스턴스-생성하기&quot;&gt;vue 인스턴스 생성하기&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/53211781/82914027-fcee8180-9fa9-11ea-9df1-cb718d463fe6.png&quot; alt=&quot;image&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;다음과 같은 사진과 문구 5000개가 쏟아지는데 이를 무한스크롤로 구현하려 한다.&lt;/p&gt;
+
+&lt;p&gt;준비 과정은 평소와 크게 다르지 않다. 다만 비동기처리를 위한 라이브러리와 무한스크롤을 위한 &lt;code class=&quot;highlighter-rouge&quot;&gt;scrollmonitor&lt;/code&gt; CDN을 추가로 로딩한다.&lt;/p&gt;
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;app&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;bottomSensor&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!--Vue CDN--&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!--무한스크롤 구현을 위한 라이브러리 CDN--&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://cdnjs.cloudflare.com/ajax/libs/scrollmonitor/1.2.0/scrollMonitor.js&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;integrity=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;sha256-BseZlDlA+yL4qu+Voi82iFa5aaifralQEXIjOjaXgeo=&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;crossorigin=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;anonymous&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!--비동기처리를 위한 axios 라이브러리 CDN--&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h4 id=&quot;js&quot;&gt;JS&lt;/h4&gt;
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;el&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;#app&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;photos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;    
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;created&quot;&gt;Created&lt;/h2&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;data, computed, methods, watch&lt;/code&gt; 등에 접근이 가능
+아직 DOM에 추가되지는 않은 상태&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;사진을-불러오는-매서드-정의하기&quot;&gt;사진을 불러오는 매서드 정의하기&lt;/h3&gt;
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;app&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-for=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;photo in photos&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;h5&amp;gt;&amp;lt;/h5&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;img&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;:src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;photo.thumbnailUrl&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;alt=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h4 id=&quot;js-1&quot;&gt;JS&lt;/h4&gt;
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;el&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;#app&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;photos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;    
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;methods&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;getPhotos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;option&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;na&quot;&gt;param&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;na&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                        &lt;span class=&quot;na&quot;&gt;_page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                        &lt;span class=&quot;na&quot;&gt;_limit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+                &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;axios&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;https://jsonplaceholder.typicode.com/photos&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+                    &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;photos&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[...&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;photos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,...&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+                    &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;   
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;axios 객체는 특정 API나 URL에서 &lt;strong&gt;파라미터 값을 같이 넘겨주어 GET 요청을 보낼 수 있다.&lt;/strong&gt; 
+API를 설명하자면 더미데이터를 가져올 수 있도록 오픈된 API이며
+파라미터 값으로 페이지와 한 페이지에 몇 개의 데이터를 넘겨줄 지 설정할 수 있다.&lt;/p&gt;
+
+&lt;h3 id=&quot;getphtotos-함수를-통해-사용자-뷰에-사진을-보여주는-과정&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;getPhtotos&lt;/code&gt; 함수를 통해 사용자 뷰에 사진을 보여주는 과정&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;API url을 GET 요청을 통해 불러와 promise 객체로 만든다.
+    &lt;ul&gt;
+      &lt;li&gt;요청을 넘겨줄 때 url 뒤에 붙여줄 파라미터 변수를 같이 넘겨준다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;요청을 통해 가져온 데이터들을 &lt;code class=&quot;highlighter-rouge&quot;&gt;photos&lt;/code&gt; 배열에 concat한다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;v-for&lt;/code&gt; 디렉티브를 통해 &lt;code class=&quot;highlighter-rouge&quot;&gt;photos&lt;/code&gt; 배열에 담긴 데이터를 하나씩 빼준다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;created-되는-순간에-콜백함수-적용하기&quot;&gt;Created 되는 순간에 콜백함수 적용하기&lt;/h3&gt;
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;created&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getPhotos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Vue 인스턴스가 아직 DOM에 추가되지는 않은 상태이지만 &lt;code class=&quot;highlighter-rouge&quot;&gt;data와 method&lt;/code&gt;를 &lt;strong&gt;추적할 수 있다.&lt;/strong&gt; 
+data를 세팅하거나 이벤트 선언, 특히 &lt;strong&gt;(1)ajax 요청을 보내기 좋은 단계&lt;/strong&gt;이다.
+또한, &lt;strong&gt;(2)미리 데이터를 준비해야 사용자 뷰에 노출이 가능&lt;/strong&gt; 하기 때문에
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Created&lt;/code&gt; 단계에서 데이터를 불러오는 것이 필요하다.&lt;/p&gt;
+
+&lt;h2 id=&quot;mounted&quot;&gt;Mounted&lt;/h2&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Vue 인스턴스가 DOM에 부착되고 난 이후 실행되는 단계이다. 
+따라서 &lt;code class=&quot;highlighter-rouge&quot;&gt;this.$el&lt;/code&gt;에 접근이 가능하며 모든 요소에 접근이 가능하다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;무한스크롤-구현-매서드-정의&quot;&gt;무한스크롤 구현 매서드 정의&lt;/h3&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;무한스크롤을 구현하기 위해서는 &lt;strong&gt;스크롤이 바닥으로 내려갔다는 사실을 Vue 인스턴스가 인식&lt;/strong&gt;하는 데 부터 시작한다.
+스크롤이 &lt;code class=&quot;highlighter-rouge&quot;&gt;bottomSensor&lt;/code&gt; 박스를 만난다는 것은 스크롤이 바닥으로 내려갔다는 것을 의미한다. 
+app과 관련된 Vue 인스턴스가 DOM에 완전히 부착이 되어야 스크롤이 바닥으로 내려갔을 때 app에서 사진을 새로 불러올 수 있다. 
+따라서 완전히 부착된(&lt;code class=&quot;highlighter-rouge&quot;&gt;mounted&lt;/code&gt;) 상태에서 무한스크롤의 콜백이 실행되는 것이 적절하다.
+```html&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div id=&quot;app&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;bottomSensor&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#### 스크롤 이벤트 활용하기(scrollMonitor 공식문서 참조)
+1. 스크롤이 바닥으로 왔음을 인식할 수 있도록 HTML 노드를 선택한다. 
+2. 스크롤과 관련된 이벤트를 생성하기 위한 scrollMonitor 객체를 생성한다.
+3. 생성된 객체가 스크롤에 들어오면(`enterViewport`) `getPhotos` 콜백을 실행한다. 
+```javascript
+const app = new Vue({
+        ...
+    methods: {
+            ...
+            ...
+        //무한스크롤 구현 부분
+        addScrollWatcher: function () {
+            const bottomSensor = document.querySelector(&quot;#bottomSensor&quot;)
+            const watcher = scrollMonitor.create(bottomSensor)
+            watcher.enterViewport(() =&amp;gt; {
+                // 서버 과부하를 막기 위한 안전장치 0.5초
+                setTimeout(() =&amp;gt; {
+                  this.getPhotos()
+                },500)
+            })
+        }
+    },
+    mounted: function () {
+        this.addScrollWatcher()
+    }
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;updated&quot;&gt;Updated&lt;/h2&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Vue 인스턴스가 실제 DOM에 붙고(&lt;code class=&quot;highlighter-rouge&quot;&gt;mounted&lt;/code&gt;) 난 이후 호출된다. 
+변경된 data를 DOM을 이용해 접근하려 할 때 적합하다. 
+따라서 mounted된 이후 뷰포트가 꽉 찰 때 까지 데이터를 불러오고 싶을 경우 사용할 수 있다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;화면을-꽉-채울-때-까지-데이터-불러오기&quot;&gt;화면을 꽉 채울 때 까지 데이터 불러오기&lt;/h4&gt;
+&lt;p&gt;데이터 객체가 바뀌고 나서 화면이 다시 렌더된 이후(예 : 무한스크롤 로직 1회 실행이 된 이후)에 &lt;code class=&quot;highlighter-rouge&quot;&gt;updated&lt;/code&gt; Hook을 실행한다.&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;HTML 노드를 불러와 &lt;code class=&quot;highlighter-rouge&quot;&gt;scrollMonitor&lt;/code&gt; 객체를 만들어서 변수에 담아준다.&lt;/li&gt;
+  &lt;li&gt;해당 객체가 보인다면(스크롤이 바닥까지 내려왔다면) 스크롤 바닥까지 데이터를 불러온다.
+```javascript
+const app = new Vue({
+     …
+ methods: {
+         …
+     data: {
+             photos: [],
+             page: 1,  &lt;br /&gt;
+             },
+     //무한스크롤 구현 부분
+     loadUntilViewportIsFull: function () {
+             const bottomSensor = document.querySelector(“#bottomSensor”)
+             const watcher = scrollMonitor.create(bottomSensor)
+             if (watcher.isFullyInViewport) {
+                 this.getPhotos()
+             }
+         }
+ },
+ updated: function () {
+     this.loadUntilViewportIsFull()
+ }
+})&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>Yoonhwan Jung</name><email>unani9292@gmail.com</email></author><summary type="html">Javascript</summary></entry><entry><title type="html">Vanilla JS로 momentum 클론코딩하기 1</title><link href="http://localhost:4000/javascript/Vanilla-JS%EB%A1%9C-momentum-%ED%81%B4%EB%A1%A0%EC%BD%94%EB%94%A9%ED%95%98%EA%B8%B0-1/" rel="alternate" type="text/html" title="Vanilla JS로 momentum 클론코딩하기 1" /><published>2020-05-25T00:00:00+09:00</published><updated>2020-05-25T00:00:00+09:00</updated><id>http://localhost:4000/javascript/Vanilla%20JS%EB%A1%9C%20momentum%20%ED%81%B4%EB%A1%A0%EC%BD%94%EB%94%A9%ED%95%98%EA%B8%B0%201</id><content type="html" xml:base="http://localhost:4000/javascript/Vanilla-JS%EB%A1%9C-momentum-%ED%81%B4%EB%A1%A0%EC%BD%94%EB%94%A9%ED%95%98%EA%B8%B0-1/">&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/53211781/82825194-c2bbac00-9ee5-11ea-95e7-aaa95fb7e5ec.png&quot; alt=&quot;image-20200520001229052&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;클론코딩-컨셉&quot;&gt;클론코딩 컨셉&lt;/h2&gt;
 &lt;blockquote&gt;
