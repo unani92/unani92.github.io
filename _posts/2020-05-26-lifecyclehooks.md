@@ -162,6 +162,8 @@ const app = new Vue({
 데이터 객체가 바뀌고 나서 화면이 다시 렌더된 이후(예 : 무한스크롤 로직 1회 실행이 된 이후)에 `updated` Hook을 실행한다.
 1. HTML 노드를 불러와 `scrollMonitor` 객체를 만들어서 변수에 담아준다.
 2. 해당 객체가 보인다면(스크롤이 바닥까지 내려왔다면) 스크롤 바닥까지 데이터를 불러온다.
+
+
 ```javascript
 const app = new Vue({
         ...
