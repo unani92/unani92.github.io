@@ -186,3 +186,4 @@ const app = new Vue({
         this.loadUntilViewportIsFull()
     }
 })
+```
