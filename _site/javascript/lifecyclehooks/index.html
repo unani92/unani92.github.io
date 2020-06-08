@@ -136,6 +136,8 @@
               <a href="/categories/">Category</a>
             </li><li class="masthead__menu-item">
               <a href="/categories/javascript">Javascript</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/django">Django</a>
             </li></ul>
         
         <button class="greedy-nav__toggle hidden" type="button">
@@ -461,73 +463,78 @@ data를 세팅하거나 이벤트 선언, 특히 <strong>(1)ajax 요청을 보�
   <p>무한스크롤을 구현하기 위해서는 <strong>스크롤이 바닥으로 내려갔다는 사실을 Vue 인스턴스가 인식</strong>하는 데 부터 시작한다.
 스크롤이 <code class="highlighter-rouge">bottomSensor</code> 박스를 만난다는 것은 스크롤이 바닥으로 내려갔다는 것을 의미한다. 
 app과 관련된 Vue 인스턴스가 DOM에 완전히 부착이 되어야 스크롤이 바닥으로 내려갔을 때 app에서 사진을 새로 불러올 수 있다. 
-따라서 완전히 부착된(<code class="highlighter-rouge">mounted</code>) 상태에서 무한스크롤의 콜백이 실행되는 것이 적절하다.
-```html</p>
+따라서 완전히 부착된(<code class="highlighter-rouge">mounted</code>) 상태에서 무한스크롤의 콜백이 실행되는 것이 적절하다.</p>
 </blockquote>
-<div id="app"></div>
-<div id="bottomSensor"></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#### 스크롤 이벤트 활용하기(scrollMonitor 공식문서 참조)
-1. 스크롤이 바닥으로 왔음을 인식할 수 있도록 HTML 노드를 선택한다. 
-2. 스크롤과 관련된 이벤트를 생성하기 위한 scrollMonitor 객체를 생성한다.
-3. 생성된 객체가 스크롤에 들어오면(`enterViewport`) `getPhotos` 콜백을 실행한다. 
-```javascript
-const app = new Vue({
-        ...
-    methods: {
-            ...
-            ...
-        //무한스크롤 구현 부분
-        addScrollWatcher: function () {
-            const bottomSensor = document.querySelector("#bottomSensor")
-            const watcher = scrollMonitor.create(bottomSensor)
-            watcher.enterViewport(() =&gt; {
-                // 서버 과부하를 막기 위한 안전장치 0.5초
-                setTimeout(() =&gt; {
-                  this.getPhotos()
-                },500)
-            })
-        }
-    },
-    mounted: function () {
-        this.addScrollWatcher()
-    }
-})
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"bottomSensor"</span><span class="nt">&gt;&lt;/div&gt;</span>
 </code></pre></div></div>
-<h2 id="updated">Updated</h2>
-<blockquote>
-  <p>Vue 인스턴스가 실제 DOM에 붙고(<code class="highlighter-rouge">mounted</code>) 난 이후 호출된다. 
+
+<h4 id="스크롤-이벤트-활용하기scrollmonitor-공식문서-참조">스크롤 이벤트 활용하기(scrollMonitor 공식문서 참조)</h4>
+<ol>
+  <li>스크롤이 바닥으로 왔음을 인식할 수 있도록 HTML 노드를 선택한다.</li>
+  <li>스크롤과 관련된 이벤트를 생성하기 위한 scrollMonitor 객체를 생성한다.</li>
+  <li>생성된 객체가 스크롤에 들어오면(<code class="highlighter-rouge">enterViewport</code>) <code class="highlighter-rouge">getPhotos</code> 콜백을 실행한다.
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+     <span class="p">...</span>
+ <span class="na">methods</span><span class="p">:</span> <span class="p">{</span>
+         <span class="p">...</span>
+         <span class="p">...</span>
+     <span class="c1">//무한스크롤 구현 부분</span>
+     <span class="na">addScrollWatcher</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+         <span class="kd">const</span> <span class="nx">bottomSensor</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">#bottomSensor</span><span class="dl">"</span><span class="p">)</span>
+         <span class="kd">const</span> <span class="nx">watcher</span> <span class="o">=</span> <span class="nx">scrollMonitor</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">bottomSensor</span><span class="p">)</span>
+         <span class="nx">watcher</span><span class="p">.</span><span class="nx">enterViewport</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+             <span class="c1">// 서버 과부하를 막기 위한 안전장치 0.5초</span>
+             <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+               <span class="k">this</span><span class="p">.</span><span class="nx">getPhotos</span><span class="p">()</span>
+             <span class="p">},</span><span class="mi">500</span><span class="p">)</span>
+         <span class="p">})</span>
+     <span class="p">}</span>
+ <span class="p">},</span>
+ <span class="na">mounted</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+     <span class="k">this</span><span class="p">.</span><span class="nx">addScrollWatcher</span><span class="p">()</span>
+ <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div>    </div>
+    <h2 id="updated">Updated</h2>
+    <blockquote>
+      <p>Vue 인스턴스가 실제 DOM에 붙고(<code class="highlighter-rouge">mounted</code>) 난 이후 호출된다. 
 변경된 data를 DOM을 이용해 접근하려 할 때 적합하다. 
 따라서 mounted된 이후 뷰포트가 꽉 찰 때 까지 데이터를 불러오고 싶을 경우 사용할 수 있다.</p>
-</blockquote>
+    </blockquote>
+  </li>
+</ol>
 
 <h4 id="화면을-꽉-채울-때-까지-데이터-불러오기">화면을 꽉 채울 때 까지 데이터 불러오기</h4>
 <p>데이터 객체가 바뀌고 나서 화면이 다시 렌더된 이후(예 : 무한스크롤 로직 1회 실행이 된 이후)에 <code class="highlighter-rouge">updated</code> Hook을 실행한다.</p>
 <ol>
   <li>HTML 노드를 불러와 <code class="highlighter-rouge">scrollMonitor</code> 객체를 만들어서 변수에 담아준다.</li>
-  <li>해당 객체가 보인다면(스크롤이 바닥까지 내려왔다면) 스크롤 바닥까지 데이터를 불러온다.
-```javascript
-const app = new Vue({
-     …
- methods: {
-         …
-     data: {
-             photos: [],
-             page: 1,  <br />
-             },
-     //무한스크롤 구현 부분
-     loadUntilViewportIsFull: function () {
-             const bottomSensor = document.querySelector(“#bottomSensor”)
-             const watcher = scrollMonitor.create(bottomSensor)
-             if (watcher.isFullyInViewport) {
-                 this.getPhotos()
-             }
-         }
- },
- updated: function () {
-     this.loadUntilViewportIsFull()
- }
-})</li>
+  <li>해당 객체가 보인다면(스크롤이 바닥까지 내려왔다면) 스크롤 바닥까지 데이터를 불러온다.</li>
 </ol>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+        <span class="p">...</span>
+    <span class="na">methods</span><span class="p">:</span> <span class="p">{</span>
+            <span class="p">...</span>
+        <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+                <span class="na">photos</span><span class="p">:</span> <span class="p">[],</span>
+                <span class="na">page</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>    
+                <span class="p">},</span>
+        <span class="c1">//무한스크롤 구현 부분</span>
+        <span class="na">loadUntilViewportIsFull</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+                <span class="kd">const</span> <span class="nx">bottomSensor</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">#bottomSensor</span><span class="dl">"</span><span class="p">)</span>
+                <span class="kd">const</span> <span class="nx">watcher</span> <span class="o">=</span> <span class="nx">scrollMonitor</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">bottomSensor</span><span class="p">)</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">watcher</span><span class="p">.</span><span class="nx">isFullyInViewport</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">this</span><span class="p">.</span><span class="nx">getPhotos</span><span class="p">()</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="na">updated</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">loadUntilViewportIsFull</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div></div>
 
         
       </section>
@@ -610,6 +617,72 @@ const app = new Vue({
     
     <h2 class="archive__item-title" itemprop="headline">
       
+        <a href="/django/Django-%ED%86%A0%ED%81%B0-%EB%B0%A9%EC%8B%9D-%EC%9D%B8%EC%A6%9D/" rel="permalink">[Django] 세상에서 제일 쉽고 빠른 토큰 방식의 인증 구현하기
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  2 분 소요
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Django
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/background.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/javascript/vue-%EB%94%94%EB%A0%89%ED%8B%B0%EB%B8%8C-%EC%86%8D%EC%84%B1/" rel="permalink">[Vue JS] 디렉티브 속성들을 활용한 Todo app 구현하기
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  1 분 소요
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Javascript
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/background.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
         <a href="/javascript/vue_cli_route/" rel="permalink">[Vue JS] Routing 연습하기(with lodash)
 </a>
       
@@ -654,72 +727,6 @@ const app = new Vue({
 
 
   2 분 소요
-
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">Javascript
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src="/assets/images/background.jpeg" alt="">
-      </div>
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/javascript/Vanilla-JS%EB%A1%9C-momentum-%ED%81%B4%EB%A1%A0%EC%BD%94%EB%94%A9%ED%95%98%EA%B8%B02/" rel="permalink">Vanilla JS로 momentum 클론코딩하기 2
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  3 분 소요
-
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">Javascript
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src="/assets/images/background.jpeg" alt="">
-      </div>
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/javascript/Vanilla-JS%EB%A1%9C-momentum-%ED%81%B4%EB%A1%A0%EC%BD%94%EB%94%A9%ED%95%98%EA%B8%B0-1/" rel="permalink">Vanilla JS로 momentum 클론코딩하기 1
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  1 분 소요
 
 </p>
     

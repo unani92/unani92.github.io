@@ -74,7 +74,7 @@ urlpatterns = [
 ### 3. Component 구성하기
 
 component는 `app.vue`, `router`, `components` 등과 같은 곳에 있는
-`src` 폴더 하위에 views 디렉터리에 위치시킨다. `BASE_DIR/src/views/views` 
+`src` 폴더 하위에 views 디렉터리에 위치시킨다(`BASE_DIR/src/views`). 
 views 디렉터리가 없으면 폴더를 생성한다. 
 
 #### index.vue

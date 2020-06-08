@@ -1,4 +1,320 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-05-28T02:48:37+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Unani의 테크 블로그</title><subtitle>장고, 자바스크립트, 알고리즘 TIL 블로그입니다.</subtitle><author><name>Yoonhwan Jung</name><email>unani9292@gmail.com</email></author><entry><title type="html">[Vue JS] Routing 연습하기(with lodash)</title><link href="http://localhost:4000/javascript/vue_cli_route/" rel="alternate" type="text/html" title="[Vue JS] Routing 연습하기(with lodash)" /><published>2020-05-27T00:00:00+09:00</published><updated>2020-05-27T00:00:00+09:00</updated><id>http://localhost:4000/javascript/vue_cli_route</id><content type="html" xml:base="http://localhost:4000/javascript/vue_cli_route/">&lt;h2 id=&quot;intro--vue에서의-routing이란&quot;&gt;intro : vue에서의 routing이란&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-06-09T00:36:55+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Unani의 테크 블로그</title><subtitle>장고, 자바스크립트, 알고리즘 TIL 블로그입니다.</subtitle><author><name>Yoonhwan Jung</name><email>unani9292@gmail.com</email></author><entry><title type="html">[Django] 세상에서 제일 쉽고 빠른 토큰 방식의 인증 구현하기</title><link href="http://localhost:4000/django/Django-%ED%86%A0%ED%81%B0-%EB%B0%A9%EC%8B%9D-%EC%9D%B8%EC%A6%9D/" rel="alternate" type="text/html" title="[Django] 세상에서 제일 쉽고 빠른 토큰 방식의 인증 구현하기" /><published>2020-06-08T00:00:00+09:00</published><updated>2020-06-08T00:00:00+09:00</updated><id>http://localhost:4000/django/Django%20%ED%86%A0%ED%81%B0%20%EB%B0%A9%EC%8B%9D%20%EC%9D%B8%EC%A6%9D</id><content type="html" xml:base="http://localhost:4000/django/Django-%ED%86%A0%ED%81%B0-%EB%B0%A9%EC%8B%9D-%EC%9D%B8%EC%A6%9D/">&lt;h3 id=&quot;articlesserializerspy&quot;&gt;articles/serializers.py&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;ol&gt;
+    &lt;li&gt;
+      &lt;p&gt;외부키로 연결된 user를 채우기 위해 &lt;code class=&quot;highlighter-rouge&quot;&gt;accounts/serializers.py&lt;/code&gt; 를 가져온다.&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;완전히 DB에 저장되기 전에 not null constraint를 방지하기 위해 &lt;code class=&quot;highlighter-rouge&quot;&gt;required=False&lt;/code&gt; 인자를 채워준다.&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;rest_framework&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;serializers&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;.models&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Article&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;accounts.serializers&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UserSerializer&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ArticleListSerializer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;serializers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ModelSerializer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Meta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Article&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;fields&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'id'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'title'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'content'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'created_at'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ArticleSerializer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;serializers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ModelSerializer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UserSerializer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;required&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# is_valid() 에서 유무검증 pass
+&lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Meta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; 
+        &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Article&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;fields&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'__all__'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;articlesviewspy&quot;&gt;articles/views.py&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;ol&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;@permission_classes&lt;/code&gt; &amp;amp; &lt;code class=&quot;highlighter-rouge&quot;&gt;IsAuthenticated&lt;/code&gt; : 로그인을 한 사용자만이 API POST 요청을 통해 새 아티클을 작성할 수 있게 한다.&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;NOT NULL CONSTRAINT 방지를 위해 최종 저장하는 과정에서 user를 넣어준다.&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;django.shortcuts&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;get_object_or_404&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;rest_framework.decorators&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;api_view&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;permission_classes&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;rest_framework.response&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Response&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;rest_framework.permissions&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IsAuthenticated&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;.serializers&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArticleListSerializer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArticleSerializer&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;.models&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Article&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;api_view&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'GET'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;article_list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;articles&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Article&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;objects&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;serializer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArticleListSerializer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;articles&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;many&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;serializer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+
+&lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;api_view&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'GET'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;article_detail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;article_pk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;article&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;get_object_or_404&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Article&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pk&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;article_pk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;serializer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArticleSerializer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;article&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;serializer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+
+&lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;api_view&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'POST'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;permission_classes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IsAuthenticated&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;create_article&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;serializer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArticleSerializer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;serializer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;is_valid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;raise_exception&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;serializer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;save&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# NOT NULL CONSTRAINT FAILED
+&lt;/span&gt;        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;serializer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;settingspy&quot;&gt;settings.py&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;토큰 인증 방식의 회원가입 및 로그인 방식의 구현을 용이하게 하는 패키지 2개를 추가 설치한다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;django-rest-auth
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;django-allauth
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;다음과 같이 앱을 등록해 준 뒤 토큰 인증 방식을 위한 설정을 다음과 같이 진행한다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;INSTALLED_APPS&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+  	&lt;span class=&quot;c1&quot;&gt;# registration
+&lt;/span&gt;  	&lt;span class=&quot;s&quot;&gt;'django.contrib.sites'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  
+  
+  	&lt;span class=&quot;c1&quot;&gt;# DRF
+&lt;/span&gt;    &lt;span class=&quot;s&quot;&gt;'rest_framework'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;'rest_framework.authtoken'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    
+    &lt;span class=&quot;c1&quot;&gt;# rest_auth + allauth
+&lt;/span&gt;    &lt;span class=&quot;s&quot;&gt;'rest_auth'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;'allauth'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;'allauth.account'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;'rest_auth.registration'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;# My Apps
+&lt;/span&gt;    &lt;span class=&quot;s&quot;&gt;'accounts'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;'articles'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# django sites app setting
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SITE_ID&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# DRF auth settings
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;REST_FRAMEWORK&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;'DEFAULT_AUTHENTICATION_CLASSES'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;'rest_framework.authentication.TokenAuthentication'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;마지막으로 마이그레이션을 진행한다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;python manage.py migrate
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;urlspy&quot;&gt;urls.py&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Rest-auth 가 제공하는 로그인, 회원가입 페이지로 연결하기 위해 다음과 같이 url을 정의한다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;django.contrib&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;admin&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;django.urls&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;include&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;urlpatterns&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'admin/'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;admin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;site&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;urls&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'articles/'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;include&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'articles.urls'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+    
+    &lt;span class=&quot;c1&quot;&gt;# rest-auth
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'rest-auth/'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;include&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'rest_auth.urls'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'rest-auth/signup/'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;include&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'rest_auth.registration.urls'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;포스트맨을-활용한-api-요청-보내기&quot;&gt;포스트맨을 활용한 API 요청 보내기&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;로그인 시도하기&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img width=&quot;951&quot; alt=&quot;스크린샷 2020-06-08 오후 11 47 35&quot; src=&quot;https://user-images.githubusercontent.com/53211781/84044449-8eb2b180-a9e2-11ea-839b-32be384a33db.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;POST 요청을 통해 아이디와 비밀번호를 json으로 보내면 토큰을 자동으로 생성해 준다.&lt;/p&gt;
+
+  &lt;p&gt;로그인 시 고유한 토큰 생성은 사실 복잡한 로직이 있지만 패키지를 통해 간단하게 구현할 수 있었다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;로그인을 바탕으로 새글 쓰기&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;앞서 &lt;code class=&quot;highlighter-rouge&quot;&gt;views.py&lt;/code&gt;에서 정의한 대로 로그인을 하지 않으면 새 아티클을 작성할 수 없다. &lt;code class=&quot;highlighter-rouge&quot;&gt;@permission_classes([IsAuthenticated])&lt;/code&gt;&lt;/p&gt;
+
+  &lt;p&gt;따라서 앞서 로그인을 통해 만들어진 토큰을 넘겨줌으로써 해당 사용자가 인증된(Authenticated) 유저인지 검증하는 과정이 필요하다. 하지만 이 역시 상당부분 구현되어 있으므로 어려울 것이 없다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img width=&quot;967&quot; alt=&quot;스크린샷 2020-06-08 오후 11 55 03&quot; src=&quot;https://user-images.githubusercontent.com/53211781/84045582-eef62300-a9e3-11ea-9b34-a15f42bf2c9c.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;헤더 정보에 사진과 같이 &lt;code class=&quot;highlighter-rouge&quot;&gt;{&quot;KEY&quot;:&quot;Authorization&quot;, &quot;VALUE&quot;: &quot;Token &amp;lt;token&amp;gt;&quot;}&lt;/code&gt;  형식으로 넣어주어야 한다. 넣어주지 않으면 보내고지 하는 API 요청이 인증받은 사용자가 보낸 것인지 알 방도가 없기 때문에 ` “detail”: “Authentication credentials were not provided.”` 와 같은 401 에러를 출력한다.&lt;/p&gt;
+
+&lt;p&gt;포스트맨은 헤더에 토큰 정보를 넣어 POST 요청을 보내는 일 조차 쉽게 해주는 좋은 어플이다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;새 글 확인하기&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;GET 요청을 통해 방금 쓴 글을 확인할 수 있다. 사실 토큰 방식의 인증 방식을 구현하기 위해서는 로그인에 성공하면 personal한 토큰을 생성하고 이를 저장하고 헤더에 붙이는 등의 구현 과정이 필요하지만 라이브러리를 통해 쉽게 구현할 수 있었다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img width=&quot;879&quot; alt=&quot;스크린샷 2020-06-09 오전 12 06 59&quot; src=&quot;https://user-images.githubusercontent.com/53211781/84046636-52cd1b80-a9e5-11ea-85b2-f0352aeabfe7.png&quot; /&gt;&lt;/p&gt;</content><author><name>Yoonhwan Jung</name><email>unani9292@gmail.com</email></author><summary type="html">Django</summary></entry><entry><title type="html">[Vue JS] 디렉티브 속성들을 활용한 Todo app 구현하기</title><link href="http://localhost:4000/javascript/vue-%EB%94%94%EB%A0%89%ED%8B%B0%EB%B8%8C-%EC%86%8D%EC%84%B1/" rel="alternate" type="text/html" title="[Vue JS] 디렉티브 속성들을 활용한 Todo app 구현하기" /><published>2020-05-30T00:00:00+09:00</published><updated>2020-05-30T00:00:00+09:00</updated><id>http://localhost:4000/javascript/vue%20%EB%94%94%EB%A0%89%ED%8B%B0%EB%B8%8C%20%EC%86%8D%EC%84%B1</id><content type="html" xml:base="http://localhost:4000/javascript/vue-%EB%94%94%EB%A0%89%ED%8B%B0%EB%B8%8C-%EC%86%8D%EC%84%B1/">&lt;h2 id=&quot;intro&quot;&gt;intro&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;v-on&lt;/code&gt; : Vanilla JS의 &lt;code class=&quot;highlighter-rouge&quot;&gt;addEventListener&lt;/code&gt;와 같다. shortcut으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;@&lt;/code&gt;로 대신할 수도 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;v-bind&lt;/code&gt; : HTML의 속성의 값에 대해 interpolate을 할 때 사용한다. shortcut으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;:&lt;/code&gt;로 대신할 수 있다.&lt;/p&gt;
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;:href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;googleUrl&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Google&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-bind:href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;naverUrl&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Naver&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;googleUrl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;https://google.com&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;naverUrl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;https://naver.com&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;randomImageUrl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;https://picsum.photos/200&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;altText&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;random-image&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;v-model&lt;/code&gt; : 폼 input과 textarea 엘리먼트에 양방향 데이터 바인딩을 생성해 준다.(공식문서)&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;뷰 인스턴스에 정의한 데이터와 양방향으로 연결이 된다고 생각하면 이해가 쉽다. 
+공식문서에 있는 예시를 보면 vue 인스턴스에 사전 정의된 데이터의 message에 
+&lt;code class=&quot;highlighter-rouge&quot;&gt;v-model&lt;/code&gt;을 통해 바인딩을 걸어주면 vue 인스턴스의 message가 실시간으로 변경된다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-model=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;message&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;placeholder=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;여기를 수정해보세요&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;메시지: &lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/53211781/83280269-59070f00-a211-11ea-84e2-78915f34cff9.png&quot; alt=&quot;image&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;todo-앱-구현하기&quot;&gt;toDo 앱 구현하기&lt;/h2&gt;
+
+&lt;h3 id=&quot;기본-컨셉&quot;&gt;기본 컨셉&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/53211781/83281964-dcc1fb00-a213-11ea-9e86-0ca4b2a534a4.png&quot; alt=&quot;image&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;할 일을 적고 추가를 하면 &lt;code class=&quot;highlighter-rouge&quot;&gt;ul&amp;gt;li&lt;/code&gt; 에 추가가 된다.
+체크박스를 클릭하면(일을 마치면) 취소선이 그어지고
+완료 버튼을 클릭하면 마친 일들이 데이터에서 삭제된다.&lt;/p&gt;
+
+&lt;h3 id=&quot;addtodo&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;addTodo()&lt;/code&gt;&lt;/h3&gt;
+
+&lt;h4 id=&quot;v-model&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;v-model&lt;/code&gt;&lt;/h4&gt;
+&lt;p&gt;뷰 인스턴스의 data에 &lt;code class=&quot;highlighter-rouge&quot;&gt;newInput&lt;/code&gt; 값을 빈 값으로 설정하고 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;input&amp;gt;&lt;/code&gt; 태그와 바인딩을 해준다.
+바인딩되어 반영된 &lt;code class=&quot;highlighter-rouge&quot;&gt;newInput&lt;/code&gt;을 바탕으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;content&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;completed(완료여부)&lt;/code&gt;를 object에 넣어 
+&lt;code class=&quot;highlighter-rouge&quot;&gt;todo&lt;/code&gt; 배열에 넣어준다. 이러한 방식을 통해 todo 목록들이 쌓이게 된다.&lt;/p&gt;
+
+&lt;h4 id=&quot;v-on&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;v-on&lt;/code&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;input&amp;gt;&lt;/code&gt; 태그에 엔터키가 입력되는 이벤트 혹은 + 버튼이 눌리는 이벤트가 발생하면
+&lt;code class=&quot;highlighter-rouge&quot;&gt;addTodo&lt;/code&gt; 매서드가 동작한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-model=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;newInput&quot;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;keydown.enter=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;addTodo&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;form-control&quot;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;placeholder=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;할 일을 적어주세요&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;button&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;click=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;addTodo&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;btn btn-light&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/button&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;el&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;#app&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;newInput&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;todos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;methods&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;addTodo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;todos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+                    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;newInput&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;completed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+                &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;newInput&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;''&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;filtertodo&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;filterTodo()&lt;/code&gt;&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;v-for은 함수의 return 값을 인자로 받을 수도 있다.todo를 All, Active, Completed로 나누어 해당하는 todo를 보여주기 위해 &lt;code class=&quot;highlighter-rouge&quot;&gt;fitlerTodo&lt;/code&gt;를 정의하였다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;is_completed&lt;/code&gt; 클래스를 가지면 취소선이 그어지도록 하기 위해 todo의 completed가 &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;이면 클래스가 표시되도록 &lt;code class=&quot;highlighter-rouge&quot;&gt;v-bind&lt;/code&gt;를 걸어주었다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;input type=&quot;checkbox&quot;&amp;gt;&lt;/code&gt;와 모델 바인딩을 통해 체크박스의 true/false여부가 todo의 completed와 연결되게 함으로써 진행중인 일과 완료된 일을 구분하는 것을 구현하였다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;select&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-model=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;status&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;form-control&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;option&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;all&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;All&lt;span class=&quot;nt&quot;&gt;&amp;lt;/option&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;option&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;active&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Active&lt;span class=&quot;nt&quot;&gt;&amp;lt;/option&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;option&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;completed&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Completed&lt;span class=&quot;nt&quot;&gt;&amp;lt;/option&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/select&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;ul&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-for=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;todo in filterTodo()&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;:class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{is_completed:todo.completed}&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-model=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;todo.completed&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;checkbox&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/ul&amp;gt;&lt;/span&gt;  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;filter-함수-사용하기&quot;&gt;filter 함수 사용하기&lt;/h4&gt;
+&lt;p&gt;여러 데이터 뭉치들로부터 조건에 만족하는 데이터만을 모아 todos를 재구성해 보여줄 것이기 때문에 &lt;code class=&quot;highlighter-rouge&quot;&gt;filter&lt;/code&gt; 함수를 사용한다. 
+함수 안에 인자는 콜백 함수가 들어간다. 따라서 콜백 함수의 조건에 맞는 todo만이 todos에서 필터링 되어 재구성된다.&lt;/p&gt;
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;newInput&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;todos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// 예시를 위한 더미데이터&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;eat kimchi&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;completed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;methods&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;filterTodo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;status&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;active&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;todos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;todo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;todo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;completed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;status&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;completed&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;todos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;todo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;todo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;completed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;todos&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;removecomplete&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;removeComplete()&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;완료된 일(&lt;code class=&quot;highlighter-rouge&quot;&gt;todo.completed === true&lt;/code&gt;)은 아예 data의 &lt;strong&gt;todos 배열에서 삭제&lt;/strong&gt; 해버리는 기능을 구현하고자 한다. 
+completed가 false인것(&lt;code class=&quot;highlighter-rouge&quot;&gt;todo.completed === false&lt;/code&gt;)을 필터링해 todos에 담는 매서드를 구현해 클릭하고자 하는 버튼에 이벤트를 걸어주면 된다.&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;button&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;click=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;removeCompleted&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;style=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;width: 70px&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;btn btn-light&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;완료&lt;span class=&quot;nt&quot;&gt;&amp;lt;/button&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;methods&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;removeCompleted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;todos&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;todos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;todo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;c1&quot;&gt;// &lt;/span&gt;
+          &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;todo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;completed&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Yoonhwan Jung</name><email>unani9292@gmail.com</email></author><summary type="html">Javascript</summary></entry><entry><title type="html">[Vue JS] Routing 연습하기(with lodash)</title><link href="http://localhost:4000/javascript/vue_cli_route/" rel="alternate" type="text/html" title="[Vue JS] Routing 연습하기(with lodash)" /><published>2020-05-27T00:00:00+09:00</published><updated>2020-05-27T00:00:00+09:00</updated><id>http://localhost:4000/javascript/vue_cli_route</id><content type="html" xml:base="http://localhost:4000/javascript/vue_cli_route/">&lt;h2 id=&quot;intro--vue에서의-routing이란&quot;&gt;intro : vue에서의 routing이란&lt;/h2&gt;
 &lt;blockquote&gt;
   &lt;p&gt;서버 사이드에서 라우팅은 URI에 해당하는 html을 렌더링하는 것이다. 
 하지만 SPA 방식의 앱에서 라우팅은 DOM 조작을 통해 해당하는 뷰를 구현할 수 있다.&lt;/p&gt;
@@ -66,7 +382,7 @@ export default router
 &lt;h3 id=&quot;3-component-구성하기&quot;&gt;3. Component 구성하기&lt;/h3&gt;
 
 &lt;p&gt;component는 &lt;code class=&quot;highlighter-rouge&quot;&gt;app.vue&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;router&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;components&lt;/code&gt; 등과 같은 곳에 있는
-&lt;code class=&quot;highlighter-rouge&quot;&gt;src&lt;/code&gt; 폴더 하위에 views 디렉터리에 위치시킨다. &lt;code class=&quot;highlighter-rouge&quot;&gt;BASE_DIR/src/views/views&lt;/code&gt; 
+&lt;code class=&quot;highlighter-rouge&quot;&gt;src&lt;/code&gt; 폴더 하위에 views 디렉터리에 위치시킨다(&lt;code class=&quot;highlighter-rouge&quot;&gt;BASE_DIR/src/views&lt;/code&gt;). 
 views 디렉터리가 없으면 폴더를 생성한다.&lt;/p&gt;
 
 &lt;h4 id=&quot;indexvue&quot;&gt;index.vue&lt;/h4&gt;
@@ -303,73 +619,78 @@ data를 세팅하거나 이벤트 선언, 특히 &lt;strong&gt;(1)ajax 요청을
   &lt;p&gt;무한스크롤을 구현하기 위해서는 &lt;strong&gt;스크롤이 바닥으로 내려갔다는 사실을 Vue 인스턴스가 인식&lt;/strong&gt;하는 데 부터 시작한다.
 스크롤이 &lt;code class=&quot;highlighter-rouge&quot;&gt;bottomSensor&lt;/code&gt; 박스를 만난다는 것은 스크롤이 바닥으로 내려갔다는 것을 의미한다. 
 app과 관련된 Vue 인스턴스가 DOM에 완전히 부착이 되어야 스크롤이 바닥으로 내려갔을 때 app에서 사진을 새로 불러올 수 있다. 
-따라서 완전히 부착된(&lt;code class=&quot;highlighter-rouge&quot;&gt;mounted&lt;/code&gt;) 상태에서 무한스크롤의 콜백이 실행되는 것이 적절하다.
-```html&lt;/p&gt;
+따라서 완전히 부착된(&lt;code class=&quot;highlighter-rouge&quot;&gt;mounted&lt;/code&gt;) 상태에서 무한스크롤의 콜백이 실행되는 것이 적절하다.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;div id=&quot;app&quot;&gt;&lt;/div&gt;
-&lt;div id=&quot;bottomSensor&quot;&gt;&lt;/div&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#### 스크롤 이벤트 활용하기(scrollMonitor 공식문서 참조)
-1. 스크롤이 바닥으로 왔음을 인식할 수 있도록 HTML 노드를 선택한다. 
-2. 스크롤과 관련된 이벤트를 생성하기 위한 scrollMonitor 객체를 생성한다.
-3. 생성된 객체가 스크롤에 들어오면(`enterViewport`) `getPhotos` 콜백을 실행한다. 
-```javascript
-const app = new Vue({
-        ...
-    methods: {
-            ...
-            ...
-        //무한스크롤 구현 부분
-        addScrollWatcher: function () {
-            const bottomSensor = document.querySelector(&quot;#bottomSensor&quot;)
-            const watcher = scrollMonitor.create(bottomSensor)
-            watcher.enterViewport(() =&amp;gt; {
-                // 서버 과부하를 막기 위한 안전장치 0.5초
-                setTimeout(() =&amp;gt; {
-                  this.getPhotos()
-                },500)
-            })
-        }
-    },
-    mounted: function () {
-        this.addScrollWatcher()
-    }
-})
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;app&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;bottomSensor&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id=&quot;updated&quot;&gt;Updated&lt;/h2&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;Vue 인스턴스가 실제 DOM에 붙고(&lt;code class=&quot;highlighter-rouge&quot;&gt;mounted&lt;/code&gt;) 난 이후 호출된다. 
+
+&lt;h4 id=&quot;스크롤-이벤트-활용하기scrollmonitor-공식문서-참조&quot;&gt;스크롤 이벤트 활용하기(scrollMonitor 공식문서 참조)&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;스크롤이 바닥으로 왔음을 인식할 수 있도록 HTML 노드를 선택한다.&lt;/li&gt;
+  &lt;li&gt;스크롤과 관련된 이벤트를 생성하기 위한 scrollMonitor 객체를 생성한다.&lt;/li&gt;
+  &lt;li&gt;생성된 객체가 스크롤에 들어오면(&lt;code class=&quot;highlighter-rouge&quot;&gt;enterViewport&lt;/code&gt;) &lt;code class=&quot;highlighter-rouge&quot;&gt;getPhotos&lt;/code&gt; 콜백을 실행한다.
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+     &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+ &lt;span class=&quot;na&quot;&gt;methods&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+         &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+         &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+     &lt;span class=&quot;c1&quot;&gt;//무한스크롤 구현 부분&lt;/span&gt;
+     &lt;span class=&quot;na&quot;&gt;addScrollWatcher&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+         &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;bottomSensor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;querySelector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;#bottomSensor&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+         &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;watcher&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;scrollMonitor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;bottomSensor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+         &lt;span class=&quot;nx&quot;&gt;watcher&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;enterViewport&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+             &lt;span class=&quot;c1&quot;&gt;// 서버 과부하를 막기 위한 안전장치 0.5초&lt;/span&gt;
+             &lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+               &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getPhotos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+             &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+         &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+ &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+ &lt;span class=&quot;na&quot;&gt;mounted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+     &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addScrollWatcher&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+ &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;h2 id=&quot;updated&quot;&gt;Updated&lt;/h2&gt;
+    &lt;blockquote&gt;
+      &lt;p&gt;Vue 인스턴스가 실제 DOM에 붙고(&lt;code class=&quot;highlighter-rouge&quot;&gt;mounted&lt;/code&gt;) 난 이후 호출된다. 
 변경된 data를 DOM을 이용해 접근하려 할 때 적합하다. 
 따라서 mounted된 이후 뷰포트가 꽉 찰 때 까지 데이터를 불러오고 싶을 경우 사용할 수 있다.&lt;/p&gt;
-&lt;/blockquote&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
 
 &lt;h4 id=&quot;화면을-꽉-채울-때-까지-데이터-불러오기&quot;&gt;화면을 꽉 채울 때 까지 데이터 불러오기&lt;/h4&gt;
 &lt;p&gt;데이터 객체가 바뀌고 나서 화면이 다시 렌더된 이후(예 : 무한스크롤 로직 1회 실행이 된 이후)에 &lt;code class=&quot;highlighter-rouge&quot;&gt;updated&lt;/code&gt; Hook을 실행한다.&lt;/p&gt;
 &lt;ol&gt;
   &lt;li&gt;HTML 노드를 불러와 &lt;code class=&quot;highlighter-rouge&quot;&gt;scrollMonitor&lt;/code&gt; 객체를 만들어서 변수에 담아준다.&lt;/li&gt;
-  &lt;li&gt;해당 객체가 보인다면(스크롤이 바닥까지 내려왔다면) 스크롤 바닥까지 데이터를 불러온다.
-```javascript
-const app = new Vue({
-     …
- methods: {
-         …
-     data: {
-             photos: [],
-             page: 1,  &lt;br /&gt;
-             },
-     //무한스크롤 구현 부분
-     loadUntilViewportIsFull: function () {
-             const bottomSensor = document.querySelector(“#bottomSensor”)
-             const watcher = scrollMonitor.create(bottomSensor)
-             if (watcher.isFullyInViewport) {
-                 this.getPhotos()
-             }
-         }
- },
- updated: function () {
-     this.loadUntilViewportIsFull()
- }
-})&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Yoonhwan Jung</name><email>unani9292@gmail.com</email></author><summary type="html">Javascript</summary></entry><entry><title type="html">Vanilla JS로 momentum 클론코딩하기 1</title><link href="http://localhost:4000/javascript/Vanilla-JS%EB%A1%9C-momentum-%ED%81%B4%EB%A1%A0%EC%BD%94%EB%94%A9%ED%95%98%EA%B8%B0-1/" rel="alternate" type="text/html" title="Vanilla JS로 momentum 클론코딩하기 1" /><published>2020-05-25T00:00:00+09:00</published><updated>2020-05-25T00:00:00+09:00</updated><id>http://localhost:4000/javascript/Vanilla%20JS%EB%A1%9C%20momentum%20%ED%81%B4%EB%A1%A0%EC%BD%94%EB%94%A9%ED%95%98%EA%B8%B0%201</id><content type="html" xml:base="http://localhost:4000/javascript/Vanilla-JS%EB%A1%9C-momentum-%ED%81%B4%EB%A1%A0%EC%BD%94%EB%94%A9%ED%95%98%EA%B8%B0-1/">&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/53211781/82825194-c2bbac00-9ee5-11ea-95e7-aaa95fb7e5ec.png&quot; alt=&quot;image-20200520001229052&quot; /&gt;&lt;/p&gt;
+  &lt;li&gt;해당 객체가 보인다면(스크롤이 바닥까지 내려왔다면) 스크롤 바닥까지 데이터를 불러온다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;methods&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;na&quot;&gt;photos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt;
+                &lt;span class=&quot;na&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;    
+                &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;//무한스크롤 구현 부분&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;loadUntilViewportIsFull&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;bottomSensor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;querySelector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;#bottomSensor&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;watcher&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;scrollMonitor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;bottomSensor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;watcher&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;isFullyInViewport&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getPhotos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+                &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;updated&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;loadUntilViewportIsFull&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Yoonhwan Jung</name><email>unani9292@gmail.com</email></author><summary type="html">Javascript</summary></entry><entry><title type="html">Vanilla JS로 momentum 클론코딩하기 1</title><link href="http://localhost:4000/javascript/Vanilla-JS%EB%A1%9C-momentum-%ED%81%B4%EB%A1%A0%EC%BD%94%EB%94%A9%ED%95%98%EA%B8%B0-1/" rel="alternate" type="text/html" title="Vanilla JS로 momentum 클론코딩하기 1" /><published>2020-05-25T00:00:00+09:00</published><updated>2020-05-25T00:00:00+09:00</updated><id>http://localhost:4000/javascript/Vanilla%20JS%EB%A1%9C%20momentum%20%ED%81%B4%EB%A1%A0%EC%BD%94%EB%94%A9%ED%95%98%EA%B8%B0%201</id><content type="html" xml:base="http://localhost:4000/javascript/Vanilla-JS%EB%A1%9C-momentum-%ED%81%B4%EB%A1%A0%EC%BD%94%EB%94%A9%ED%95%98%EA%B8%B0-1/">&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/53211781/82825194-c2bbac00-9ee5-11ea-95e7-aaa95fb7e5ec.png&quot; alt=&quot;image-20200520001229052&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;클론코딩-컨셉&quot;&gt;클론코딩 컨셉&lt;/h2&gt;
 &lt;blockquote&gt;

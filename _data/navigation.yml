@@ -10,3 +10,5 @@ main:
   #   url: /sitemap/
   - title: "Javascript"
     url: "/categories/javascript"
+  - title: "Django"
+    url: "/categories/django"

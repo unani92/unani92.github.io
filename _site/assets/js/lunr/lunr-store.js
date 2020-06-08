@@ -28,4 +28,16 @@ var store = [{
         "tags": [],
         "url": "http://localhost:4000/javascript/vue_cli_route/",
         "teaser": "http://localhost:4000/assets/images/background.jpeg"
+      },{
+        "title": "[Vue JS] 디렉티브 속성들을 활용한 Todo app 구현하기",
+        "excerpt":"intro v-on : Vanilla JS의 addEventListener와 같다. shortcut으로 @로 대신할 수도 있다. v-bind : HTML의 속성의 값에 대해 interpolate을 할 때 사용한다. shortcut으로 :로 대신할 수 있다. &lt;a :href=\"googleUrl\"&gt;Google&lt;/a&gt; &lt;a v-bind:href=\"naverUrl\"&gt;Naver&lt;/a&gt; &lt;script &gt; new Vue({ ... ... data: { googleUrl: \"https://google.com\", naverUrl: \"https://naver.com\", randomImageUrl: \"https://picsum.photos/200\", altText:\"random-image\", } }) &lt;/script&gt; v-model...","categories": ["Javascript"],
+        "tags": [],
+        "url": "http://localhost:4000/javascript/vue-%EB%94%94%EB%A0%89%ED%8B%B0%EB%B8%8C-%EC%86%8D%EC%84%B1/",
+        "teaser": "http://localhost:4000/assets/images/background.jpeg"
+      },{
+        "title": "[Django] 세상에서 제일 쉽고 빠른 토큰 방식의 인증 구현하기",
+        "excerpt":"articles/serializers.py 외부키로 연결된 user를 채우기 위해 accounts/serializers.py 를 가져온다. 완전히 DB에 저장되기 전에 not null constraint를 방지하기 위해 required=False 인자를 채워준다. from rest_framework import serializers from .models import Article from accounts.serializers import UserSerializer class ArticleListSerializer(serializers.ModelSerializer): class Meta: model = Article fields = ['id', 'title','content' ,'created_at'] class ArticleSerializer(serializers.ModelSerializer): user = UserSerializer(required=False)...","categories": ["Django"],
+        "tags": [],
+        "url": "http://localhost:4000/django/Django-%ED%86%A0%ED%81%B0-%EB%B0%A9%EC%8B%9D-%EC%9D%B8%EC%A6%9D/",
+        "teaser": "http://localhost:4000/assets/images/background.jpeg"
       }]
