@@ -40,4 +40,10 @@ var store = [{
         "tags": [],
         "url": "http://localhost:4000/django/Django-%ED%86%A0%ED%81%B0-%EB%B0%A9%EC%8B%9D-%EC%9D%B8%EC%A6%9D/",
         "teaser": "http://localhost:4000/assets/images/background.jpeg"
+      },{
+        "title": "[Vue JS] props, emit 연습하기 - 유투브 클론코딩",
+        "excerpt":"Intro vue는 기본적으로 v-model이라는 양방향 데이터 바인딩 디렉티브를 제공한다. v-model은 한 컴포넌트 내에서 사용자의 입력값을 컴포넌트의 데이터와 바인딩하기에는 좋은 디렉티브이지만, 데이터 흐름을 추적하고 디버깅 측면에서 부모자식 혹은 동일 레벨의 컴포넌트와의 데이터 바인딩을 위해 사용하기에 좋은 방법이라 하기 어렵다. 따라서 다른 컴포넌트와 데이터 흐름을 비교적 쉽게 추적하게 하기 위해서는 단방향 바인딩이...","categories": ["Javascript"],
+        "tags": [],
+        "url": "http://localhost:4000/javascript/props_emit/",
+        "teaser": "http://localhost:4000/assets/images/background.jpeg"
       }]
