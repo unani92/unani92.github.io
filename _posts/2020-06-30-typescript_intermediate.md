@@ -136,9 +136,9 @@ src에 있는 모든 ts 파일은 ts 규칙의 적용을 받고(`include`)
 
 - `$ npm start`를 실행한다. 
 - ts 파일의 내용이 바뀌어 저장할때마다 컴파일이 진행된다.
+
 ```bash
 5:08:23 ├F10: PM┤ - File change detected. Starting incremental compilation...
-
 
 5:08:23 ├F10: PM┤ - Found 0 errors. Watching for file changes.
 Hello unani is male, 28 old
