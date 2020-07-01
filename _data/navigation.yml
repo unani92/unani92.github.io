@@ -12,3 +12,5 @@ main:
     url: "/categories/javascript"
   - title: "Django"
     url: "/categories/django"
+  - title: "Algorithm"
+    url: "/categories/algorithm"
