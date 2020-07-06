@@ -46,4 +46,58 @@ var store = [{
         "tags": [],
         "url": "http://localhost:4000/javascript/props_emit/",
         "teaser": "http://localhost:4000/assets/images/background.jpeg"
+      },{
+        "title": "[React JS] React 입문하기 - 설치, 프로젝트 시작, component, props",
+        "excerpt":"리액트 설치하기 리액트를 시작하기 위해서는 node 환경에서 npx를 설치해야 한다. 윈도우의 경우에는 node 공식 홈페이지에서 다운 받을 수 있으며, 맥 환경에서는 홈브류를 통해 쉽게 다운로드 가능하다.(최신 버전을 설치해도 큰 문제는 없으나 버전 호환이 확실하지 않은 경우에는 이미 안정성이 보장된 버전을 특정해 설치도 가능하다.) $ brew install node@[version] npm과 npx npm은...","categories": ["Javascript"],
+        "tags": [],
+        "url": "http://localhost:4000/javascript/react-%EC%9E%85%EB%AC%B8%ED%95%98%EA%B8%B0/",
+        "teaser": "http://localhost:4000/assets/images/background.jpeg"
+      },{
+        "title": "[Typescript] Typescript 입문하기 - 왜 Typescript를 사용하나요?",
+        "excerpt":"intro: 사용하는 이유 자바스크립트의 장점이자 단점인 자유도로 인해 프로젝트가 거대해지고 협업 주체들이 많아질수록 단점이 부각된다. 예를 들어 디버깅을 하는 상황에서 특정 부분에서 undefined가 발생해 코드가 실행되지 않는다던가 하는 상황에서 엄격한 규칙이 없는 js는 문제가 있다. 따라서 타입스크립을 통해 엄격한 형식을 강제함으롬써 이러한 문제들을 줄이기 위해 사용한다. 0. 개발환경 만들기 typescript...","categories": ["Javascript"],
+        "tags": [],
+        "url": "http://localhost:4000/javascript/typescript_intermediate/",
+        "teaser": "http://localhost:4000/assets/images/background.jpeg"
+      },{
+        "title": "[Algorithm] 백준 14502 : 연구소",
+        "excerpt":"intro 문제 링크 코로나 시국에 맞는 BFS DFS를 모두 사용해서 해결할 수 있는 좋은 문제라고 생각한다. 연구소는 크기가 N×M인 직사각형으로 나타낼 수 있으며, 직사각형은 1×1 크기의 정사각형으로 나누어져 있다. 연구소는 빈 칸, 벽으로 이루어져 있으며, 벽은 칸 하나를 가득 차지한다. 일부 칸은 바이러스가 존재하며, 이 바이러스는 상하좌우로 인접한 빈 칸으로...","categories": ["Algorithm"],
+        "tags": [],
+        "url": "http://localhost:4000/algorithm/algorithm-%EC%97%B0%EA%B5%AC%EC%86%8C/",
+        "teaser": "http://localhost:4000/assets/images/background.jpeg"
+      },{
+        "title": "[Algorithm] 백준 15686 : 치킨배달",
+        "excerpt":"intro 문제 링크 크기가 N×N인 도시가 있다. 0은 빈 칸, 1은 집, 2는 치킨집이다. 0 2 0 1 0 1 0 1 0 0 0 0 0 0 0 0 0 0 1 1 0 0 0 1 2 임의의 두 칸 (r1, c1)과 (r2, c2) 사이의 거리는 ** r1-r2...","categories": ["Algorithm"],
+        "tags": [],
+        "url": "http://localhost:4000/algorithm/algorithm-%EC%B9%98%ED%82%A8%EB%B0%B0%EB%8B%AC/",
+        "teaser": "http://localhost:4000/assets/images/background.jpeg"
+      },{
+        "title": "[SWEA] 2112. [모의 SW 역량테스트] 보호 필름",
+        "excerpt":"intro 문제링크 dfs 문제 해결 시 필요 없는 부분을 빠르게 솎아내는 백트래킹이 중요하다는 것을 알려주는 문제라고 생각한다. 보호 필름의 성능을 검사하기 위해 합격기준 K라는 값을 사용한다. 단면의 모든 세로방향에 대해서 동일한 특성의 셀들이 K개 이상 연속적으로 있는 경우에만 성능검사를 통과하게 된다. [Fig. 4]는 세 번째 막에 약품 A를 투입하여 특성...","categories": ["Algorithm"],
+        "tags": [],
+        "url": "http://localhost:4000/algorithm/algorithm-swea-film/",
+        "teaser": "http://localhost:4000/assets/images/background.jpeg"
+      },{
+        "title": "[SWEA] 2382. [모의 SW 역량테스트] 미생물 격리",
+        "excerpt":"intro 문제링크 전형적인 시뮬레이션 구현 문제이다. 조건을 일반화하고 빠르게 함수로 구현할 수 있다면 빠르게 풀고 다른 문제로 넘어갈 수 있는 유형이라 생각한다. 정사각형 구역 안에 K개의 미생물 군집이 있다. 이 구역은 가로 N개, 세로 N개, 총 N * N 개의 동일한 크기의 정사각형 셀들로 이루어져 있다. 미생물들이 구역을 벗어나는걸 방지하기...","categories": ["Algorithm"],
+        "tags": [],
+        "url": "http://localhost:4000/algorithm/algorithm-swea-germ/",
+        "teaser": "http://localhost:4000/assets/images/background.jpeg"
+      },{
+        "title": "[Graph QL] GraphQL Schema 확장하기",
+        "excerpt":"schema 확장하기 여러개의 object들이 담긴 배열을 불러오는 쿼리와 개별 object를 불러오는 쿼리를 구현하고자 한다. 1. 배열에 담긴 모든 object 불러오기 people 쿼리를 요청할 때 출력되는 데이터의 형태는 배열이다. 따라서 배열 안에 원소는 Person의 스키마를 따른다. schema.graphql type Person { id: Int!, name: String!, age: Int!, gender: String! } type Query...","categories": ["Graph QL"],
+        "tags": [],
+        "url": "http://localhost:4000/graph%20ql/graphQL-%EC%8A%A4%ED%82%A4%EB%A7%88-%ED%99%95%EC%9E%A5/",
+        "teaser": "http://localhost:4000/assets/images/background.jpeg"
+      },{
+        "title": "[Graph QL] GraphQL Schema 확장하기",
+        "excerpt":"schema 확장하기 여러개의 object들이 담긴 배열을 불러오는 쿼리와 개별 object를 불러오는 쿼리를 구현하고자 한다. 1. 배열에 담긴 모든 object 불러오기 people 쿼리를 요청할 때 출력되는 데이터의 형태는 배열이다. 따라서 배열 안에 원소는 Person의 스키마를 따른다. schema.graphql type Person { id: Int!, name: String!, age: Int!, gender: String! } type Query...","categories": ["Graph QL"],
+        "tags": [],
+        "url": "http://localhost:4000/graph%20ql/graphQL-%EC%8A%A4%ED%82%A4%EB%A7%88-%ED%99%95%EC%9E%A5/",
+        "teaser": "http://localhost:4000/assets/images/background.jpeg"
+      },{
+        "title": "[Graph QL] GraphQL 입문하기",
+        "excerpt":"intro 1. 시작하기 $ npm i graphql-yoga 2. 왜 Graph QL 인가? REST API와의 비교 내가 본 설명 중에서 가장 쉽게 설명된 GQL vs REST API : GraphQL이 뭔가요(얄팍한 코딩사전) 기존의 REST API는 url을 통해 요청(request)을 보내면 이에 대응하는 응답으로서 JSON이나 XML이 넘오오는 방식이었다. 하지만 이는 치명적인 문제가 있었다. 정해진...","categories": ["Javascript"],
+        "tags": [],
+        "url": "http://localhost:4000/javascript/graphql-%EC%9E%85%EB%AC%B8%ED%95%98%EA%B8%B0/",
+        "teaser": "http://localhost:4000/assets/images/background.jpeg"
       }]

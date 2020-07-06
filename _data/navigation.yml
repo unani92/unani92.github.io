@@ -14,3 +14,5 @@ main:
     url: "/categories/django"
   - title: "Algorithm"
     url: "/categories/algorithm"
+  - title: "Graph QL"
+    url: "/categories/graphql"

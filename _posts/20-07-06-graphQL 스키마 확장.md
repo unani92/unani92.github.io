@@ -131,4 +131,3 @@ const resolvers = {
 export default resolvers
 ```
 
-<img width="1110" alt="스크린샷 2020-07-06 오후 10 08 01" src="https://user-images.githubusercontent.com/53211781/86596457-336de200-bfd5-11ea-8397-6e29d870ceb7.png">
