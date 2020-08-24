@@ -1,16 +1,13 @@
-\---
-
+---
 title: "[SWEA] 4613. 러시아 국기 같은 깃발" 
 
 excerpt: "Algorithm"
 
 categories:
 
+  - Algorithm
 
-
-  \- Algorithm
-
-\---
+---
 
 
 
