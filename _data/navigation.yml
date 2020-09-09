@@ -10,8 +10,8 @@ main:
   #   url: /sitemap/
   - title: "Javascript"
     url: "/categories/javascript"
-  - title: "Django"
-    url: "/categories/django"
+  - title: "Python"
+    url: "/categories/python"
   - title: "Algorithm"
     url: "/categories/algorithm"
   - title: "Graph QL"
